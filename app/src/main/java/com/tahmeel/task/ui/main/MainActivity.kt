@@ -1,4 +1,4 @@
-package com.tahmeel.task.ui
+package com.tahmeel.task.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
