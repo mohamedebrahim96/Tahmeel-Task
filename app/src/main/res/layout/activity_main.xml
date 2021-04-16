@@ -49,7 +49,7 @@
             app:layout_constraintTop_toBottomOf="@id/appBarLayout"
             app:paginationPokemonList="@{vm}"
             app:spanCount="2"
-            app:submitList="@{vm.pokemonList}"
+            app:submitList="@{vm.pendingOrdersList}"
             app:toast="@{vm.toastMessage}"
             tools:listitem="@layout/item_order" />
 
