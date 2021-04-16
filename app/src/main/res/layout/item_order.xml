@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="order"
+            type="com.tahmeel.task.model.Order" />
+
+    </data>
+
+    <com.skydoves.transformationlayout.TransformationLayout
+        android:id="@+id/transformationLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:transformation_duration="550">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:background="@color/blue_800"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/blue_800"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="4dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foreground="?attr/selectableItemBackground"
+                tools:background="@color/blue_800"
+                tools:ignore="UnusedAttribute">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:fontFamily="sans-serif"
+                    android:scaleType="center"
+                    android:text="@{order.customerName}"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Order" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/image2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:drawableStart="@drawable/ic_time"
+                    android:drawablePadding="10dp"
+                    android:text="@{order.createdAt}"
+                    android:textColor="@color/grey_200"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/image"
+                    tools:text="Time" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/rounded_border"
+                    android:elevation="4dp"
+                    android:padding="5dp"
+                    android:text="@{order.orderPriceFormatted}"
+                    android:textColor="@color/blue_400"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/image"
+                    tools:text="Order" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/name3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:drawableStart="@drawable/ic_phone"
+                    android:drawablePadding="10dp"
+                    android:text="@{order.phoneNumber}"
+                    android:textColor="@color/grey_200"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/image2"
+                    tools:text="Phone" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/name4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:drawableStart="@drawable/ic_hash"
+                    android:drawablePadding="10dp"
+                    android:text="@{``+order.loadRef}"
+                    android:textColor="@color/grey_200"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/name3"
+                    tools:text="Order ID" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </com.skydoves.transformationlayout.TransformationLayout>
+
+</layout>
