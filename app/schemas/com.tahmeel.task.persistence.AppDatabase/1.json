@@ -1,0 +1,70 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "78efee5bb3c17c1a8f4b4dd40da64011",
+    "entities": [
+      {
+        "tableName": "Order",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`loadRef` INTEGER, `createdAt` TEXT NOT NULL, `customerName` TEXT NOT NULL, `orderNumber` TEXT NOT NULL, `orderPriceFormatted` TEXT NOT NULL, `phoneNumber` INTEGER NOT NULL, `tahmeelFeeInCents` INTEGER NOT NULL, PRIMARY KEY(`loadRef`))",
+        "fields": [
+          {
+            "fieldPath": "loadRef",
+            "columnName": "loadRef",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "customerName",
+            "columnName": "customerName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orderNumber",
+            "columnName": "orderNumber",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orderPriceFormatted",
+            "columnName": "orderPriceFormatted",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "phoneNumber",
+            "columnName": "phoneNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tahmeelFeeInCents",
+            "columnName": "tahmeelFeeInCents",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "loadRef"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '78efee5bb3c17c1a8f4b4dd40da64011')"
+    ]
+  }
+}

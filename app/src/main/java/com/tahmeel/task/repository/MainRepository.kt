@@ -6,8 +6,12 @@ import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.suspendOnSuccess
 import com.skydoves.whatif.whatIfNotNull
 import com.tahmeel.task.network.TahmeelClient
+import com.tahmeel.task.persistence.TahmeelDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 /**
@@ -28,7 +32,7 @@ class MainRepository @Inject constructor(
         onComplete: () -> Unit,
         onError: (String?) -> Unit
     ) = flow {
-        var orders = tahmeelDao.getPokemonList(page)
+        var orders = tahmeelDao.getAllOrdersList(page)
         if (orders.isEmpty()) {
 
             val response = tahmeelClient.fetchPendingOrdersList(page = page)
@@ -37,7 +41,7 @@ class MainRepository @Inject constructor(
                     orders = response.pendingOrders
                     //orders.forEach { order -> order.page = page }
                     tahmeelDao.insertPokemonList(orders)
-                    emit(tahmeelDao.getAllPokemonList(page))
+                    emit(tahmeelDao.getAllOrdersList(page))
                 }
             }
                 .onError {
@@ -45,7 +49,7 @@ class MainRepository @Inject constructor(
                 }
                 .onException { onError(message) }
         } else {
-            emit(tahmeelDao.getAllPokemonList(page))
+            emit(tahmeelDao.getAllOrdersList(page))
         }
     }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(Dispatchers.IO)
 }
