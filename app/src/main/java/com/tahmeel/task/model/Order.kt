@@ -19,12 +19,12 @@ import kotlinx.parcelize.Parcelize
 @JsonClass(generateAdapter = true)
 data class Order(
     @field:Json(name = "load_ref") @PrimaryKey val loadRef: Int?,
-    @field:Json(name = "created_at") val createdAt: String,
-    @field:Json(name = "customer_name") val customerName: String,
-    @field:Json(name = "order_number") val orderNumber: String,
-    @field:Json(name = "order_price_formatted") val orderPriceFormatted: String,
-    @field:Json(name = "phone_number") val phoneNumber: Int,
-    @field:Json(name = "tahmeel_fee_in_cents") val tahmeelFeeInCents: Int,
+    @field:Json(name = "created_at") val createdAt: String?,
+    @field:Json(name = "customer_name") val customerName: String?,
+    @field:Json(name = "order_number") val orderNumber: String?,
+    @field:Json(name = "order_price_formatted") val orderPriceFormatted: String?,
+    @field:Json(name = "phone_number") val phoneNumber: String?,
+    @field:Json(name = "tahmeel_fee_in_cents") val tahmeelFeeInCents: Int?,
 ) : Parcelable
 
 //"created_at": "2021-02-22T13:38:23.071910Z",

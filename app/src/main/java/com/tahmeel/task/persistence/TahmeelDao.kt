@@ -17,5 +17,5 @@ interface TahmeelDao {
 //    suspend fun getOrdersList(page_: Int): List<Order>
 
     @Query("SELECT * FROM `Order`")
-    suspend fun getAllOrdersList(page_: Int): List<Order>
+    suspend fun getAllOrdersList(): List<Order>
 }

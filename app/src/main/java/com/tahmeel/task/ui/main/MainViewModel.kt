@@ -38,11 +38,14 @@ class MainViewModel @Inject constructor(
 
     private val pendingOrdersFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
     private val pendingOrdersListFlow = pendingOrdersFetchingIndex.flatMapLatest { page ->
-        mainRepository.fetchPokemonList(
+        mainRepository.fetchOrderList(
             page = page,
             onStart = { isLoading = true },
             onComplete = { isLoading = false },
-            onError = { toastMessage = it }
+            onError = {
+                Timber.e(it)
+                toastMessage = it
+            }
         )
     }
 

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "78efee5bb3c17c1a8f4b4dd40da64011",
+    "identityHash": "bb00a4eab3771ce92f75e47927ce02c5",
     "entities": [
       {
         "tableName": "Order",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`loadRef` INTEGER, `createdAt` TEXT NOT NULL, `customerName` TEXT NOT NULL, `orderNumber` TEXT NOT NULL, `orderPriceFormatted` TEXT NOT NULL, `phoneNumber` INTEGER NOT NULL, `tahmeelFeeInCents` INTEGER NOT NULL, PRIMARY KEY(`loadRef`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`loadRef` INTEGER, `createdAt` TEXT, `customerName` TEXT, `orderNumber` TEXT, `orderPriceFormatted` TEXT, `phoneNumber` TEXT, `tahmeelFeeInCents` INTEGER, PRIMARY KEY(`loadRef`))",
         "fields": [
           {
             "fieldPath": "loadRef",
@@ -18,37 +18,37 @@
             "fieldPath": "createdAt",
             "columnName": "createdAt",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "customerName",
             "columnName": "customerName",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "orderNumber",
             "columnName": "orderNumber",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "orderPriceFormatted",
             "columnName": "orderPriceFormatted",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "phoneNumber",
             "columnName": "phoneNumber",
-            "affinity": "INTEGER",
-            "notNull": true
+            "affinity": "TEXT",
+            "notNull": false
           },
           {
             "fieldPath": "tahmeelFeeInCents",
             "columnName": "tahmeelFeeInCents",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -64,7 +64,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '78efee5bb3c17c1a8f4b4dd40da64011')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bb00a4eab3771ce92f75e47927ce02c5')"
     ]
   }
 }
