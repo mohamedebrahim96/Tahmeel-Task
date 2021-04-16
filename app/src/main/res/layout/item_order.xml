@@ -7,7 +7,7 @@
 
         <variable
             name="order"
-            type="com.skydoves.pokedex.model.Pokemon" />
+            type="com.tahmeel.task.model.Order" />
 
     </data>
 
@@ -22,9 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
-            android:background="@color/background800"
+            android:background="@color/purple_200"
             android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/white_12"
+            app:cardBackgroundColor="@color/purple_200"
             app:cardCornerRadius="14dp"
             app:cardElevation="4dp">
 
@@ -32,20 +32,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:foreground="?attr/selectableItemBackground"
-                tools:background="@color/background800"
+                tools:background="@color/purple_200"
                 tools:ignore="UnusedAttribute">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/image"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:scaleType="center"
+                    android:text="@{order.createdAt}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:paletteCard="@{cardView}"
-                    app:paletteImage="@{order.imageUrl}" />
+                    tools:text="Order" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/name"
@@ -55,14 +55,14 @@
                     android:gravity="center"
                     android:maxLines="1"
                     android:padding="12dp"
-                    android:text="@{order.name}"
+                    android:text="@{order.orderPriceFormatted}"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/image"
-                    tools:text="Bulbasaur" />
+                    tools:text="Order" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
