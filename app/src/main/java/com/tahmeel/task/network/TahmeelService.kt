@@ -10,6 +10,6 @@ interface TahmeelService {
 
     @GET("technical_interview/orders/pending")
     suspend fun fetchPendingOrdersList(
-        @Query("offset") offset: Int = 0
+        @Query("page") page: Int = 0
     ): ApiResponse<PendingOrdersResponse>
 }

@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
-import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -33,16 +32,15 @@ class MainRepository @Inject constructor(
         onComplete: () -> Unit,
         onError: (String?) -> Unit
     ) = flow {
-        var orders = tahmeelDao.getAllOrdersList()
+        var orders = tahmeelDao.getOrdersList(page)
         if (orders.isEmpty()) {
-
             val response = tahmeelClient.fetchPendingOrdersList(page = page)
             response.suspendOnSuccess {
                 data.whatIfNotNull { response ->
                     orders = response.pendingOrders
-                    //orders.forEach { order -> order.page = page }
-                    tahmeelDao.insertPokemonList(orders)
-                    emit(tahmeelDao.getAllOrdersList())
+                    orders.forEach { order -> order.page = page }
+                    tahmeelDao.insertOrdersList(orders)
+                    emit(tahmeelDao.getAllOrdersList(page))
                 }
             }
                 .onError {
@@ -50,10 +48,9 @@ class MainRepository @Inject constructor(
                 }
                 .onException {
                     onError(message)
-                    Timber.e(message)
                 }
         } else {
-            emit(tahmeelDao.getAllOrdersList())
+            emit(tahmeelDao.getAllOrdersList(page))
         }
     }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(Dispatchers.IO)
 }

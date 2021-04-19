@@ -11,9 +11,6 @@ class TahmeelClient @Inject constructor(
 
     suspend fun fetchPendingOrdersList(
         page: Int
-    ): ApiResponse<PendingOrdersResponse> =
-        tahmeelService.fetchPendingOrdersList(
-            offset = page
-        )
+    ): ApiResponse<PendingOrdersResponse> = tahmeelService.fetchPendingOrdersList(page)
 
 }

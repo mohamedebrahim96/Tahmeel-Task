@@ -11,11 +11,15 @@ import com.tahmeel.task.model.Order
 interface TahmeelDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPokemonList(pokemonList: List<Order>)
+    suspend fun insertOrdersList(orderList: List<Order>)
 
 //    @Query("SELECT * FROM Order WHERE page = :page_")
 //    suspend fun getOrdersList(page_: Int): List<Order>
 
-    @Query("SELECT * FROM `Order`")
-    suspend fun getAllOrdersList(): List<Order>
+
+    @Query("SELECT * FROM `Order` WHERE page = :page_")
+    suspend fun getOrdersList(page_: Int): List<Order>
+
+    @Query("SELECT * FROM `Order` WHERE page <= :page_")
+    suspend fun getAllOrdersList(page_: Int): List<Order>
 }

@@ -18,6 +18,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Order(
+    var page: Int = 0,
     @field:Json(name = "load_ref") @PrimaryKey val loadRef: Int?,
     @field:Json(name = "created_at") val createdAt: String?,
     @field:Json(name = "customer_name") val customerName: String?,

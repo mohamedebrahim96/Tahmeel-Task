@@ -2,12 +2,18 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "bb00a4eab3771ce92f75e47927ce02c5",
+    "identityHash": "4848526267a065dbbedde60872487d89",
     "entities": [
       {
         "tableName": "Order",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`loadRef` INTEGER, `createdAt` TEXT, `customerName` TEXT, `orderNumber` TEXT, `orderPriceFormatted` TEXT, `phoneNumber` TEXT, `tahmeelFeeInCents` INTEGER, PRIMARY KEY(`loadRef`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`page` INTEGER NOT NULL, `loadRef` INTEGER, `createdAt` TEXT, `customerName` TEXT, `orderNumber` TEXT, `orderPriceFormatted` TEXT, `phoneNumber` TEXT, `tahmeelFeeInCents` INTEGER, PRIMARY KEY(`loadRef`))",
         "fields": [
+          {
+            "fieldPath": "page",
+            "columnName": "page",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
           {
             "fieldPath": "loadRef",
             "columnName": "loadRef",
@@ -64,7 +70,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bb00a4eab3771ce92f75e47927ce02c5')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4848526267a065dbbedde60872487d89')"
     ]
   }
 }

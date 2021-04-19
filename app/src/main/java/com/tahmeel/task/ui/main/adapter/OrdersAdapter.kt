@@ -16,23 +16,23 @@ import com.tahmeel.task.model.Order
  */
 
 
-class OrdersAdapter : BindingListAdapter<Order, OrdersAdapter.PokemonViewHolder>(diffUtil) {
+class OrdersAdapter : BindingListAdapter<Order, OrdersAdapter.OrdersViewHolder>(diffUtil) {
 
     private var onClickedAt = 0L
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersViewHolder {
         val binding = parent.binding<ItemOrderBinding>(R.layout.item_order)
-        return PokemonViewHolder(binding)
+        return OrdersViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OrdersViewHolder, position: Int) {
         holder.binding.apply {
             order = getItem(position)
             executePendingBindings()
         }
     }
 
-    class PokemonViewHolder(val binding: ItemOrderBinding) :
+    class OrdersViewHolder(val binding: ItemOrderBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     companion object {
