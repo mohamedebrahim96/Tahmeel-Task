@@ -10,7 +10,7 @@ import com.tahmeel.task.model.Order
  * ebrahimm131@gmail.com
  */
 
-@Database(entities = [Order::class], version = 1, exportSchema = true)
+@Database(entities = [Order::class], version = 2, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun tahmeelDao(): TahmeelDao
