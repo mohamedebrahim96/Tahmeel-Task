@@ -5,6 +5,7 @@ import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.suspendOnSuccess
 import com.skydoves.whatif.whatIfNotNull
+import com.tahmeel.task.model.Filter
 import com.tahmeel.task.network.TahmeelClient
 import com.tahmeel.task.persistence.TahmeelDao
 import kotlinx.coroutines.Dispatchers
@@ -27,30 +28,35 @@ class MainRepository @Inject constructor(
 
     @WorkerThread
     fun fetchOrderList(
-        page: Int,
+        filter: Filter,
         onStart: () -> Unit,
         onComplete: () -> Unit,
         onError: (String?) -> Unit
     ) = flow {
-        var orders = tahmeelDao.getOrdersList(page)
-        if (orders.isEmpty()) {
-            val response = tahmeelClient.fetchPendingOrdersList(page = page)
-            response.suspendOnSuccess {
-                data.whatIfNotNull { response ->
-                    orders = response.pendingOrders
-                    orders.forEach { order -> order.page = page }
-                    tahmeelDao.insertOrdersList(orders)
-                    emit(tahmeelDao.getAllOrdersList(page))
+        if (filter.filterByCent != null) {
+            emit(tahmeelDao.getFilteredByCents(filter.filterByCent!!))
+        }else{
+            var orders = tahmeelDao.getOrdersList(filter.page)
+            if (orders.isEmpty()) {
+                val response = tahmeelClient.fetchPendingOrdersList(page = filter.page)
+                response.suspendOnSuccess {
+                    data.whatIfNotNull { response ->
+                        orders = response.pendingOrders
+                        orders.forEach { order -> order.page = filter.page }
+                        tahmeelDao.insertOrdersList(orders)
+                        emit(tahmeelDao.getAllOrdersList(filter.page))
+                    }
                 }
+                    .onError {
+                        onError("error")
+                    }
+                    .onException {
+                        onError(message)
+                    }
+            } else {
+                emit(tahmeelDao.getAllOrdersList(filter.page))
             }
-                .onError {
-                    onError("error")
-                }
-                .onException {
-                    onError(message)
-                }
-        } else {
-            emit(tahmeelDao.getAllOrdersList(page))
         }
+
     }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(Dispatchers.IO)
 }

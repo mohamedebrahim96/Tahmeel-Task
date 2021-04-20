@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.skydoves.bindables.BindingViewModel
 import com.skydoves.bindables.asBindingProperty
 import com.skydoves.bindables.bindingProperty
+import com.tahmeel.task.model.Filter
 import com.tahmeel.task.model.Order
 import com.tahmeel.task.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,10 +37,11 @@ class MainViewModel @Inject constructor(
     var toastMessage: String? by bindingProperty(null)
         private set
 
-    private val pendingOrdersFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
+    private val pendingOrdersFetchingIndex: MutableStateFlow<Filter> =
+        MutableStateFlow(Filter(0, null))
     private val pendingOrdersListFlow = pendingOrdersFetchingIndex.flatMapLatest { page ->
         mainRepository.fetchOrderList(
-            page = page,
+            filter = page,
             onStart = { isLoading = true },
             onComplete = { isLoading = false },
             onError = {
@@ -59,10 +61,17 @@ class MainViewModel @Inject constructor(
         Timber.d("init MainViewModel")
     }
 
+
+    fun getSearchedProducts(cents: Int?) {
+        pendingOrdersFetchingIndex.value = Filter(0, cents)
+    }
+
+
     @MainThread
     fun fetchNextPendingOrderList() {
-        if (!isLoading) {
-            pendingOrdersFetchingIndex.value++
+        if (!isLoading && pendingOrdersFetchingIndex.value.filterByCent == null) {
+            val pageNumber = pendingOrdersFetchingIndex.value.page + 1
+            pendingOrdersFetchingIndex.value = Filter(pageNumber, null)
         }
     }
 }

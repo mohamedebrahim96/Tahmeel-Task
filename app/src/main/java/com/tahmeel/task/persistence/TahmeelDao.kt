@@ -22,4 +22,7 @@ interface TahmeelDao {
 
     @Query("SELECT * FROM `Order` WHERE page <= :page_")
     suspend fun getAllOrdersList(page_: Int): List<Order>
+
+    @Query("SELECT * FROM `Order` WHERE tahmeelFeeInCents = :tahmeelFeeInCents_")
+    suspend fun getFilteredByCents(tahmeelFeeInCents_: Int): List<Order>
 }
